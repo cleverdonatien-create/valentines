@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+
+<style>
+  body {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1 {
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  #message {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+
+  button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  #yesBtn {
+    background-color: #ff2e63;
+    color: white;
+    margin-right: 20px;
+  }
+
+  #noBtn {
+    background-color: white;
+    color: #ff2e63;
+    position: absolute;
+  }
+
+  /* Heart animation */
+  .heart {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+    animation: floatUp 4s linear forwards;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-150px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Do you want to be my Valentine? 💕</h1>
+<div id="message">Be honest 😇</div>
+
+<div>
+  <button id="yesBtn">YES 💖</button>
+  <button id="noBtn">NO 💔</button>
+</div>
+
+<!-- Romantic Music -->
+<audio id="music" autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_46c9b6a8d2.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const message = document.getElementById("message");
+
+  const funnyMessages = [
+    "Nice try 😏",
+    "The NO button is shy 😂",
+    "Oops! Missed it 💨",
+    "You can't escape love 💘",
+    "Just say YES already 😜"
+  ];
+
+  let attempts = 0;
+
+  noBtn.addEventListener("mouseover", () => {
+    attempts++;
+
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    message.textContent = funnyMessages[attempts % funnyMessages.length];
+  });
+
+  yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+      <h1>💖 Clever got you 😎💘</h1>
+      <p style="color:white;font-size:20px;">Best Valentine decision ever 🥰</p>
+    `;
+  });
+
+  // Heart animation generator
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }, 300);
+</script>
+
+</body>
+</html>
